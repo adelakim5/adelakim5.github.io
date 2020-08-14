@@ -9,7 +9,8 @@ let deleteTotalItems = () => {
         while(article.hasChildNodes()){
             article.removeChild(article.firstChild)
         }
-    } 
+    }
+    deleteAllBtn.style.visibility = 'hidden' 
 }
 
 let checkStatus = () => {
@@ -20,19 +21,23 @@ let checkStatus = () => {
     }
 }
 
-let upload = (one) => {
+let upload = (item) => {
+    // 쇼핑목록 아이템
     let listOne = document.createElement('div')
-    let del = document.createElement('button')
+    let delBtn = document.createElement('button')
     let p = document.createElement('p')
-    p.textContent = one
+    p.textContent = item
     
     article.appendChild(listOne)
     listOne.appendChild(p)
-    listOne.appendChild(del)
+    listOne.appendChild(delBtn)
+    // 추가한 아이템으로 자동 스크롤 
+    listOne.scrollIntoView({block: 'center'})
     
-    del.addEventListener("click", () => {
+    delBtn.addEventListener("click", () => {
         let answer = confirm('정말로 삭제하시겠습니까?')
         if(answer) article.removeChild(listOne)
+        // 전체삭제 휴지통을 보여주기 위해 || 지우기 위해 
         checkStatus()
     })
 }
@@ -41,6 +46,7 @@ function enter() {
     if (content.value === '') alert('내용을 입력해주세요.')
     else {
         upload(content.value)
+        // 전체삭제 휴지통을 보여주기 위해 || 지우기 위해 
         checkStatus()
         content.value = ''
         content.focus()
@@ -51,6 +57,7 @@ btn.addEventListener('click', () => {
     if (content.value === '') alert('내용을 입력해주세요.')
     else {
         upload(content.value)
+        // 전체삭제 휴지통을 보여주기 위해 || 지우기 위해 
         checkStatus()
         content.value = ''
         content.focus()
@@ -59,5 +66,4 @@ btn.addEventListener('click', () => {
 
 deleteAllBtn.addEventListener('click', () => {
     deleteTotalItems()
-    checkStatus()
 })
