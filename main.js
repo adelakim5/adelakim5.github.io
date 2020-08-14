@@ -12,19 +12,6 @@ let deleteTotalItems = () => {
     } 
 }
 
-let deleteItem = (x) => {
-    let answer = confirm('정말로 삭제하시겠습니까?')
-    if (answer) {
-        let child = article.childNodes
-        for (let i = 0; i < child.length; i++) {
-            if (child[i].className == x) {
-                article.removeChild(child[i])
-                break
-            }
-        }
-    }
-}
-
 let checkStatus = () => {
     if(article.hasChildNodes()){
         deleteAllBtn.style.visibility = 'visible'
@@ -38,14 +25,16 @@ let upload = (one) => {
     let del = document.createElement('button')
     let p = document.createElement('p')
     p.textContent = one
+    
     article.appendChild(listOne)
-    let children = article.childNodes.length
-    let classNumber = children.toString()
-    del.setAttribute('class', classNumber)
-    del.setAttribute('onclick', 'deleteItem(' + del.className + ')')
-    listOne.setAttribute('class', classNumber)
     listOne.appendChild(p)
     listOne.appendChild(del)
+    
+    del.addEventListener("click", () => {
+        let answer = confirm('정말로 삭제하시겠습니까?')
+        if(answer) article.removeChild(listOne)
+        checkStatus()
+    })
 }
 
 function enter() {
