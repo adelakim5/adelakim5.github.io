@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <section>
+        <h3>Shopping List</h3>
+        <button type="button" id="deleteAll"><img src="deleteAll.png" alt="deleteAll" title="전체삭제"></button>
+        <article></article>
+        <input id="content" type="text" placeholder="물건을 입력해주세요..." onkeydown="if(event.keyCode === 13) {enter();}">
+        <div id="footer">
+            <button type="button" id="submit"><img src="add.png" alt="add"></button>
+        </div>
+    </section>
+</body>
+
+</html>
