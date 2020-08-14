@@ -5,28 +5,33 @@ let deleteAllBtn = document.querySelector('#deleteAll')
 
 let deleteTotalItems = () => {
     let answer = confirm('정말로 모든 내용을 삭제하시겠습니까?')
-    if(answer){
-        while(article.hasChildNodes()){
+    if (answer) {
+        while (article.hasChildNodes()) {
             article.removeChild(article.firstChild)
         }
-    } 
+    }
 }
 
 let deleteItem = (x) => {
     let answer = confirm('정말로 삭제하시겠습니까?')
     if (answer) {
         let child = article.childNodes
-        for (let i = 0; i < child.length; i++) {
-            if (child[i].className == x) {
-                article.removeChild(child[i])
-                break
+        if (child.length === 1) {
+            article.removeChild(article.firstChild)
+            deleteAllBtn.style.visibility = 'hidden'
+        } else {
+            for (let i = 0; i < child.length; i++) {
+                if (child[i].className == x) {
+                    article.removeChild(child[i])
+                    break
+                }
             }
         }
     }
 }
 
 let checkStatus = () => {
-    if(article.hasChildNodes()){
+    if (article.hasChildNodes()) {
         deleteAllBtn.style.visibility = 'visible'
     } else {
         deleteAllBtn.style.visibility = 'hidden'
