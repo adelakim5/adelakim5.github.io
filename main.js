@@ -66,4 +66,5 @@ btn.addEventListener('click', () => {
 
 deleteAllBtn.addEventListener('click', () => {
     deleteTotalItems()
+    content.focus()
 })
