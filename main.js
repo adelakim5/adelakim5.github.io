@@ -54,6 +54,7 @@ function enter() {
         upload(content.value)
         checkStatus()
         content.value = ''
+        content.focus()
     }
 }
 
@@ -63,6 +64,7 @@ btn.addEventListener('click', () => {
         upload(content.value)
         checkStatus()
         content.value = ''
+        content.focus()
     }
 })
 
