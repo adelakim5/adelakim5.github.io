@@ -1,14 +1,12 @@
 let content = document.getElementById('content')
-let btn = document.querySelector('#submit')
+let submit__btn = document.querySelector('#submit')
 let article = document.querySelector('article')
 let deleteAllBtn = document.querySelector('#deleteAll')
 
 let deleteTotalItems = () => {
     let answer = confirm('정말로 모든 내용을 삭제하시겠습니까?')
     if(answer){
-        while(article.hasChildNodes()){
-            article.removeChild(article.firstChild)
-        }
+      article.innerHTML = ''
     }
     deleteAllBtn.style.visibility = 'hidden' 
 }
@@ -21,10 +19,14 @@ let checkStatus = () => {
     }
 }
 
+let id = 0
+
 let upload = (item) => {
     // 쇼핑목록 아이템
     let listOne = document.createElement('div')
+    listOne.setAttribute('data-id', id)
     let delBtn = document.createElement('button')
+    delBtn.setAttribute('data-id', id)
     let p = document.createElement('p')
     p.textContent = item
     
@@ -33,13 +35,7 @@ let upload = (item) => {
     listOne.appendChild(delBtn)
     // 추가한 아이템으로 자동 스크롤 
     listOne.scrollIntoView({block: 'center'})
-    
-    delBtn.addEventListener("click", () => {
-        let answer = confirm('정말로 삭제하시겠습니까?')
-        if(answer) article.removeChild(listOne)
-        // 전체삭제 휴지통을 보여주기 위해 || 지우기 위해 
-        checkStatus()
-    })
+    id++
 }
 
 function enter() {
@@ -53,7 +49,7 @@ function enter() {
     }
 }
 
-btn.addEventListener('click', () => {
+submit__btn.addEventListener('click', () => {
     if (content.value === '') alert('내용을 입력해주세요.')
     else {
         upload(content.value)
@@ -67,4 +63,14 @@ btn.addEventListener('click', () => {
 deleteAllBtn.addEventListener('click', () => {
     deleteTotalItems()
     content.focus()
+})
+
+article.addEventListener('click', (e)=>{
+    const id = e.target.dataset.id
+    if(id){
+        const x = document.querySelector(`div[data-id="${id}"]`)
+        x.remove()
+        checkStatus()
+        content.focus()
+    }
 })
